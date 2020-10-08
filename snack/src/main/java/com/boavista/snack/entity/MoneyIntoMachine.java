@@ -1,5 +1,6 @@
 package com.boavista.snack.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -9,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name="money_into_machine")
-public class MoneyIntoMachine {
+public class MoneyIntoMachine implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer	id;
