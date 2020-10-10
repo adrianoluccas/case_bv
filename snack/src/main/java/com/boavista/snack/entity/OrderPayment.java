@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Generated;
+
 @Entity
 @Table(name="order_payment")
 public class OrderPayment implements Serializable{
@@ -22,7 +24,7 @@ public class OrderPayment implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	@Column(name="id_order")
-	private Integer idOrder;
+	private Long idOrder;
 	@Column(name="dt_creation")
 	private Date	dtCreation;
 	@Column(name="dt_update")
@@ -38,10 +40,10 @@ public class OrderPayment implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Integer getIdOrder() {
+	public Long getIdOrder() {
 		return idOrder;
 	}
-	public void setIdOrder(Integer idOrder) {
+	public void setIdOrder(Long idOrder) {
 		this.idOrder = idOrder;
 	}
 	public Date getDtCreation() {

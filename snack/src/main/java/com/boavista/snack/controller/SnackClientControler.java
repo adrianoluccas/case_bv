@@ -20,34 +20,28 @@ import com.boavista.snack.dto.InputMoneyResultDTO;
 import com.boavista.snack.entity.Product;
 import com.boavista.snack.repository.OrderRepository;
 import com.boavista.snack.repository.ProductRepository;
+import com.boavista.snack.service.PaymentService;
 
 @RestController
 @RequestMapping("client")
-@Service
 public class SnackClientControler {
 
-	@Autowired private ProductRepository productRepository;
-	@Autowired private OrderRepository orderRepository;
-	
+	@Autowired PaymentService paymentService;
 	
 	@RequestMapping(method = RequestMethod.GET,path="/matheus/{id}")
     @ResponseBody
 	public Optional<Product> getSnacks(@PathVariable Long id) {
 //		productRepository.
-		return productRepository.findById(id);
+		return null;
 		//return "<html><body><h1>API IS ON!</h1><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Stevie_Wonder_1994.jpg/220px-Stevie_Wonder_1994.jpg'></body></html>";	
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public @ResponseBody InputMoneyResultDTO inputMoney(@RequestBody InputMoneyRequestDTO inputMoneyRequestDTO) {
-		
-		System.out.println(orderRepository.getMaxId());
 		if (!validateInputMoney(inputMoneyRequestDTO.getInputedMoney())) {
 			return new InputMoneyResultDTO(Boolean.FALSE, "Cedula inválida, verifique os valores permitidos");
 		}
-		
-		
-		return null;
+		return paymentService.inputMoney(inputMoneyRequestDTO);
 	}
 
 	private Boolean validateInputMoney(BigDecimal inputedMoney) {
