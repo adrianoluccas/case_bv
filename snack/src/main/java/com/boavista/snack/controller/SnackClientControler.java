@@ -1,4 +1,4 @@
-package com.boavista.snack.service;
+package com.boavista.snack.controller;
 
 import java.util.Optional;
 
@@ -15,7 +15,7 @@ import com.boavista.snack.repository.ProductRepository;
 @RestController
 @RequestMapping("client")
 @Service
-public class SnackClientService {
+public class SnackClientControler {
 
 	@Autowired ProductRepository productRepository;
 	
