@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity(name="product")
+@Entity
+@Table(name="product")
 public class Product implements Serializable{
 	/**
 	 * 
@@ -25,7 +27,7 @@ public class Product implements Serializable{
 	@Column
 	private BigDecimal	charge;
 	@Column(name="id_machine")
-	private Integer	idMachine;
+	private Long	idMachine;
 	
 	
 	public Long getId() {
@@ -52,10 +54,10 @@ public class Product implements Serializable{
 	public void setCharge(BigDecimal charge) {
 		this.charge = charge;
 	}
-	public Integer getIdMachine() {
+	public Long getIdMachine() {
 		return idMachine;
 	}
-	public void setIdMachine(Integer idMachine) {
+	public void setIdMachine(Long idMachine) {
 		this.idMachine = idMachine;
 	}
 	

@@ -15,7 +15,7 @@ public class InputMoneyResultDTO {
 	}
 	
 	public InputMoneyResultDTO() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public BigDecimal getInputedMoney() {

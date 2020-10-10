@@ -11,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Generated;
-
 @Entity
 @Table(name="order_payment")
 public class OrderPayment implements Serializable{

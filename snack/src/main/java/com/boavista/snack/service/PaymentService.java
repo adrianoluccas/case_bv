@@ -5,9 +5,12 @@ import java.util.GregorianCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boavista.snack.dto.CancelPaymentResponseDTO;
 import com.boavista.snack.dto.InputMoneyRequestDTO;
 import com.boavista.snack.dto.InputMoneyResultDTO;
+import com.boavista.snack.entity.MoneyIntoMachine;
 import com.boavista.snack.entity.OrderPayment;
+import com.boavista.snack.repository.MoneyIntoMachineRepository;
 import com.boavista.snack.repository.OrderRepository;
 
 @Service
@@ -15,6 +18,8 @@ public class PaymentService {
 	
 	@Autowired
 	private OrderRepository orderRepository;
+	@Autowired
+	private MoneyIntoMachineRepository moneyIntoMachineRepository;
 	
 	public InputMoneyResultDTO inputMoney(InputMoneyRequestDTO inputMoneyRequestDTO) {
 		InputMoneyResultDTO resultDTO = new InputMoneyResultDTO();
@@ -38,9 +43,16 @@ public class PaymentService {
 		resultDTO.setInputedMoney(inputMoneyRequestDTO.getInputedMoney());
 		resultDTO.setTotalOrderMoney(orderRepository.getTotalPriceByIdOrder(orderPayment.getIdOrder()));
 		resultDTO.setOrder(orderPayment.getIdOrder());
-			
+		
+		MoneyIntoMachine moneyIntoMachine = moneyIntoMachineRepository.findByIdMachineAndPrice(inputMoneyRequestDTO.getIdMachine(),inputMoneyRequestDTO.getInputedMoney());
+		moneyIntoMachine.setQuantity(moneyIntoMachine.getQuantity().intValue()+1);	
+		moneyIntoMachineRepository.save(moneyIntoMachine);
 		
 		return resultDTO;
+	}
+	
+	public CancelPaymentResponseDTO cancelPaymentByOrder (Long orderPayment) {
+		return null;
 	}
 
 	private OrderPayment populateOrderPayment(OrderPayment payment,InputMoneyRequestDTO inputRequestDTO) {

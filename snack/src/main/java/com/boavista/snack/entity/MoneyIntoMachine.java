@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity(name="money_into_machine")
+@Entity
+@Table(name="money_into_machine")
 public class MoneyIntoMachine implements Serializable {
 	/**
 	 * 
@@ -23,7 +25,7 @@ public class MoneyIntoMachine implements Serializable {
 	@Column
 	private Integer	quantity;
 	@Column(name="id_machine")
-	private Integer	idMachine;
+	private Long	idMachine;
 	
 	public Integer getId() {
 		return id;
@@ -43,10 +45,10 @@ public class MoneyIntoMachine implements Serializable {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public Integer getIdMachine() {
+	public Long getIdMachine() {
 		return idMachine;
 	}
-	public void setIdMachine(Integer idMachine) {
+	public void setIdMachine(Long idMachine) {
 		this.idMachine = idMachine;
 	}
 	
