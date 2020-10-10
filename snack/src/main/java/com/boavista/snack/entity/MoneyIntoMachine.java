@@ -11,6 +11,10 @@ import javax.persistence.Id;
 
 @Entity(name="money_into_machine")
 public class MoneyIntoMachine implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer	id;

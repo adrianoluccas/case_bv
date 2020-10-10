@@ -6,11 +6,23 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-//@Entity(name="order")
-public class Order implements Serializable{
-	@Column
-	private Integer id;
+@Entity
+@Table(name="order_payment")
+public class OrderPayment implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	@Column(name="id_order")
+	private Integer idOrder;
 	@Column(name="dt_creation")
 	private Date	dtCreation;
 	@Column(name="dt_update")
@@ -19,11 +31,18 @@ public class Order implements Serializable{
 	private String status;
 	@Column
 	private BigDecimal	price;
-	public Integer getId() {
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	public Integer getIdOrder() {
+		return idOrder;
+	}
+	public void setIdOrder(Integer idOrder) {
+		this.idOrder = idOrder;
 	}
 	public Date getDtCreation() {
 		return dtCreation;
@@ -49,6 +68,7 @@ public class Order implements Serializable{
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+	
 	
 	
 }
