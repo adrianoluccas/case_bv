@@ -31,7 +31,17 @@ public class OrderPayment implements Serializable{
 	private String status;
 	@Column
 	private BigDecimal	price;
+	@Column(name="idMachine")
+	private Long idMachine;
 	
+	
+	
+	public Long getIdMachine() {
+		return idMachine;
+	}
+	public void setIdMachine(Long idMachine) {
+		this.idMachine = idMachine;
+	}
 	public Long getId() {
 		return id;
 	}

@@ -34,5 +34,13 @@ public class ProductService {
 		}
 		return listDTO;
 	}
+
+	public void reset(Long idMachine) {
+		List<Product>listProduct = productRepository.findByIdMachine(idMachine);
+		for (Product product : listProduct) {
+			product.setQuantity(new Short("0"));
+			productRepository.save(product);
+		}
+	}
 	
 }

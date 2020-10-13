@@ -13,5 +13,7 @@ public interface ProductRepository extends BaseRepository<Product> {
 	
 	@Query(value = "select prod from Product prod where prod.idMachine= :iMachine")
 	public List<Product> findByIdMachine (@Param("iMachine")Long idMachine);
+	@Query(value = "select prod from Product prod where prod.idMachine= :iMachine and prod.id=:iId")
+	public Product findByIdFromIdMachine(@Param("iId")Long id,@Param("iMachine")Long idMachine);
 	
 }
