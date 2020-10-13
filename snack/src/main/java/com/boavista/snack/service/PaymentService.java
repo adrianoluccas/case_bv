@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
@@ -18,6 +19,8 @@ import com.boavista.snack.dto.BuyProductResponseDTO;
 import com.boavista.snack.dto.CancelPaymentResponseDTO;
 import com.boavista.snack.dto.InputMoneyRequestDTO;
 import com.boavista.snack.dto.InputMoneyResultDTO;
+import com.boavista.snack.dto.LoadRequestDTO;
+import com.boavista.snack.dto.LoadResponseDTO;
 import com.boavista.snack.dto.MoneyResponseDTO;
 import com.boavista.snack.entity.MoneyIntoMachine;
 import com.boavista.snack.entity.OrderPayment;
@@ -197,5 +200,23 @@ public class PaymentService {
 			moneyIntoMachineRepository.save(moneyIntoMachine);
 		}
 	}
+
+	public LoadResponseDTO loadMoney(LoadRequestDTO requestDTO) {
+		LoadResponseDTO responseDTO = new LoadResponseDTO();
+		Optional<MoneyIntoMachine> money = moneyIntoMachineRepository.findById(requestDTO.getId());
+		if (money!=null) {
+			MoneyIntoMachine moneyMachine = money.get();
+			int qtt = moneyMachine.getQuantity().intValue() + requestDTO.getQuantity().intValue();
+			moneyMachine.setQuantity((int)qtt);
+			moneyIntoMachineRepository.save(moneyMachine);
+			responseDTO.setAccepted(true);
+			responseDTO.setDescription("Incluido com sucesso");
+			return responseDTO;
+		}
+		responseDTO.setAccepted(false);
+		responseDTO.setDescription("Moeda Invalido");
+		return responseDTO;
+	}
+	
 	
 }

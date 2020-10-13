@@ -2,17 +2,15 @@ package com.boavista.snack.dto;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-
 public class MoneyResponseDTO {
-	private Integer	id;
+	private Long	id;
 	private BigDecimal	price;
 	private Integer	quantity;
 	private Long	idMachine;
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public BigDecimal getPrice() {

@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.boavista.snack.dto.LoadRequestDTO;
+import com.boavista.snack.dto.LoadResponseDTO;
 import com.boavista.snack.dto.ProductResponseDTO;
 import com.boavista.snack.entity.Product;
 import com.boavista.snack.repository.ProductRepository;
@@ -41,6 +43,22 @@ public class ProductService {
 			product.setQuantity(new Short("0"));
 			productRepository.save(product);
 		}
+	}
+
+	public LoadResponseDTO loadProduct(LoadRequestDTO productDTO) {
+		LoadResponseDTO responseDTO = new LoadResponseDTO();
+		Product product = productRepository.findByIdFromIdMachine(productDTO.getId(), productDTO.getIdMachine());
+		if (product!=null) {
+			int qtt = product.getQuantity().intValue() + productDTO.getQuantity().intValue();
+			product.setQuantity((short)qtt);
+			productRepository.save(product);
+			responseDTO.setAccepted(true);
+			responseDTO.setDescription("Incluido com sucesso");
+			return responseDTO;
+		}
+		responseDTO.setAccepted(false);
+		responseDTO.setDescription("Produto Invalido");
+		return responseDTO;
 	}
 	
 }

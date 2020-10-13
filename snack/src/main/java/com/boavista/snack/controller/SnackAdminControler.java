@@ -1,6 +1,5 @@
 package com.boavista.snack.controller;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.boavista.snack.dto.BuyProductRequestDTO;
-import com.boavista.snack.dto.BuyProductResponseDTO;
-import com.boavista.snack.dto.CancelPaymentResponseDTO;
-import com.boavista.snack.dto.InputMoneyRequestDTO;
-import com.boavista.snack.dto.InputMoneyResultDTO;
+import com.boavista.snack.dto.LoadRequestDTO;
+import com.boavista.snack.dto.LoadResponseDTO;
 import com.boavista.snack.dto.MoneyResponseDTO;
 import com.boavista.snack.dto.ProductResponseDTO;
+import com.boavista.snack.dto.ResetRequestMachineDTO;
 import com.boavista.snack.service.PaymentService;
 import com.boavista.snack.service.ProductService;
 
@@ -31,7 +28,6 @@ public class SnackAdminControler {
 	ProductService productService;
 
 
-
 	@RequestMapping(method = RequestMethod.GET, path = "/snacks/{idMachine}")
 	public @ResponseBody List<ProductResponseDTO> productsIntoMachine(@PathVariable Long idMachine) {
 		return productService.getProductList(idMachine);
@@ -41,5 +37,24 @@ public class SnackAdminControler {
 		return paymentService.getMoneyList(idMachine);
 	}
 
+	@RequestMapping(method = RequestMethod.POST, path = "/reset")
+	public void resetMachine(@RequestBody ResetRequestMachineDTO resetRequestMachine) {
+		if(resetRequestMachine.getMoney()) {
+			paymentService.reset(resetRequestMachine.getIdMachine());
+		}
+		if(resetRequestMachine.getProduct()) {
+			productService.reset(resetRequestMachine.getIdMachine());
+		}
+
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, path = "/loadproduct")
+	public LoadResponseDTO loadProduct(@RequestBody LoadRequestDTO productDTO) {
+		return productService.loadProduct(productDTO);
+	}
+	@RequestMapping(method = RequestMethod.POST, path = "/loadmoney")
+	public LoadResponseDTO loadMoney(@RequestBody LoadRequestDTO requestDTO) {
+		return paymentService.loadMoney(requestDTO);
+	}
 
 }

@@ -19,7 +19,7 @@ public class MoneyIntoMachine implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer	id;
+	private Long	id;
 	@Column
 	private BigDecimal	price;
 	@Column
@@ -27,10 +27,10 @@ public class MoneyIntoMachine implements Serializable {
 	@Column(name="id_machine")
 	private Long	idMachine;
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public BigDecimal getPrice() {
